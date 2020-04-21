@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { todoList } from '../models/mock-todoList'
+import { Todo } from '../models/todo'
 
 @Component({
   selector: 'app-root',

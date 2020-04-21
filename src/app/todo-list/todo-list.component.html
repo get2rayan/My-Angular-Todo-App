@@ -1,0 +1,42 @@
+<section class="todoapp">
+
+    <header class="header">
+      <h1>TodoList</h1>
+      <input class="new-todo" 
+            placeholder="What to do?" 
+            (keyup.enter)="addTodo()"
+            [(ngModel)]="this.newItem" autofocus>
+    </header>
+  
+    <!-- This section should be hidden by default and shown when there are todos -->
+    <section class="main">
+        <!--<div *ngFor="let todo of todos; let i=index">
+            <app-todo-item [todo]="todo" [index]="i"></app-todo-item>
+        </div>-->      
+        <app-todo-item *ngFor="let todo of Todos; let i=index" 
+                        [todo]="todo" 
+                        [index]="i" 
+                        [onDelete]="removeTodo.bind(this, todo)"
+                        (onChildUpdateClick)="updateTodo($event)"
+                        [ToggleTodo]="toggleTodo.bind(this, todo)"
+        ></app-todo-item>
+    </section>
+  
+    <!-- This footer should hidden by default and shown when there are todos -->
+    <footer class="footer">
+      <span class="todo-count"><strong>{{ ActiveTodos.length }}</strong> item(s) left</span>
+      <ul class="filters">
+        <li>
+          <a routerLink="/all" [class.selected]="path==='all'">All</a>
+        </li>
+        <li>
+          <a routerLink="/active" routerLinkActive="selected">Active</a>
+        </li>
+        <li>
+          <a routerLink="/completed" routerLinkActive="selected">Completed</a>
+        </li>
+      </ul>
+      <!-- Hidden if no completed items are left ↓ -->
+      <button class="clear-completed" (click)="clearCompletedTasks()">Clear completed</button>
+    </footer>
+  </section>
